@@ -22,10 +22,10 @@ public class ComputerEntity implements Serializable {
     @Column(name = "computer_trade")
     private String computerTrade;
 
-    @Column(name = "computer_price",columnDefinition = "Decimal(10,2) default='100.00'")
+    @Column(name = "computer_price")
     private String computerPrice;
 
-    @Lob
+    /*@Lob
     private String bigData;
 
     @Transient
@@ -33,7 +33,7 @@ public class ComputerEntity implements Serializable {
     private String justJava;
 
     @Column(name = "computer_serial_number",length = 11,nullable = false,unique = true)
-    private int serialComputerNumber;
+    private int serialComputerNumber; */
 
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
