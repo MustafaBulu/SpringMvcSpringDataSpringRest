@@ -34,7 +34,7 @@ public class ComputerEntity implements Serializable {
     private String computerTrade;
 
     @Column(name = "computer_price")
-    private String computerPrice;
+    private double computerPrice;
 
     /*@Lob
     private String bigData;
