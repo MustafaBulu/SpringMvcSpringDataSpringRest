@@ -1,6 +1,5 @@
 package com.innova.controller;
 
-import com.innova.entity.ComputerEntity;
 import com.innova.entity.PersonEntity;
 import com.innova.repository.IDelivedQueryRepository;
 import lombok.extern.log4j.Log4j2;

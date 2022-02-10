@@ -1,6 +1,5 @@
 package com.innova.repository;
 
-import com.innova.entity.ComputerEntity;
 import com.innova.entity.PersonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

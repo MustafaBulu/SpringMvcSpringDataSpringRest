@@ -4,7 +4,6 @@ import com.innova.entity.ComputerEntity;
 import com.innova.repository.IMyRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
