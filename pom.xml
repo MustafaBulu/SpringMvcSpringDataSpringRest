@@ -17,12 +17,13 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
-
-        <!--default xml yapmak icin-->
+        <!--
+        Defaultu xml yapmak için
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
         </dependency>
+        -->
 
         <!--jpa -->
         <dependency>
