@@ -3,9 +3,7 @@ package com.innova.controller;
 import com.innova.dto.ProductDto;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 @Controller
@@ -156,6 +155,56 @@ public class ProductController {
         RestTemplate restTemplate=new RestTemplate();
         restTemplate.exchange(URL,HttpMethod.DELETE,HttpEntity.EMPTY,Void.class);
         return "Silindi Controller";
+    }
+
+
+
+    /////////
+    // STATUS CODE OK
+    // http://localhost:8080/rest/status1
+    @GetMapping("/rest/status1")
+    public ResponseEntity<ProductDto>  getStatus1() {
+        ProductDto productDto = ProductDto.builder().productId(0L).productName("telefon 1").productPrice(6000).build();
+        //Datamız varsa bir sıkıntı yoksa  ==> OK,
+
+        // return new ResponseEntity<>(productDto, HttpStatus.OK);
+        // return  ResponseEntity.status(HttpStatus.OK).body(productDto);
+        // return ResponseEntity.ok().body(productDto);
+        return ResponseEntity.ok(productDto);
+    }
+
+    // http://localhost:8080/rest/status2/notfound/0
+    @GetMapping("/rest/status2/notfound/{id}")
+    public ResponseEntity<?>  getStatus2(@PathVariable(name = "id") Long id){
+        ProductDto productDto = ProductDto.builder().productId(id).productName("telefon 2").productPrice(7000).build();
+        if(productDto.getProductId()==0){
+            // return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Kayıt Bulunamadı ..."); //404
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(id+ " id'li Kayıt Bulundu ... "); //200
+
+    }
+
+
+    // http://localhost:8080/rest/status2/badrequest/0
+    @GetMapping("/rest/status2/badrequest/{id}")
+    public ResponseEntity<?>  getStatus3(@PathVariable(name = "id") Long id){
+        ProductDto productDto = ProductDto.builder().productId(id).productName("telefon 2").productPrice(7000).build();
+        if(productDto.getProductId()==0){
+            return ResponseEntity.badRequest().build(); //400
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(id+ " id'li Kayıt Bulundu ... "); //200
+    }
+
+    // http://localhost:8080/rest/status2/ok4/4
+    @GetMapping("/rest/status2/ok4/{id}")
+    public ResponseEntity<?>  getStatus4(@PathVariable(name = "id") Long id){
+        ProductDto productDto = ProductDto.builder().productId(id).productName("telefon 3").productPrice(8000).build();
+        return
+                (ResponseEntity<?>) ResponseEntity
+                        .status(HttpStatus.OK)
+                        .contentType(new MediaType("application","json", Charset.forName("UTF-8")))
+                        .body(" Tamamdır");
     }
 
 
