@@ -57,4 +57,14 @@ public class ProductService {
         return  productDto;
     }
 
+
+    ///////////////////////
+    //DELETE
+    @DeleteMapping("/delete/productdto/{id}")
+    public void deleteProduct( @PathVariable(name = "id") Long id){
+        log.info("silindi....  RestController "+id);
+        //database
+    }
+
+
 }

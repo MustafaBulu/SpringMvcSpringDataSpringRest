@@ -146,6 +146,19 @@ public class ProductController {
     }
 
 
+    ///////////
+    // DELETE
+    // http://localhost:8080/client/controller/delete/1
+    @GetMapping("/client/controller/delete/{id}")
+    @ResponseBody
+    public String deleteProduct(@PathVariable(name = "id") Long id) {
+        String URL = "http://localhost:8080/delete/productdto/"+id;
+        RestTemplate restTemplate=new RestTemplate();
+        restTemplate.exchange(URL,HttpMethod.DELETE,HttpEntity.EMPTY,Void.class);
+        return "Silindi Controller";
+    }
+
+
 
 
 
