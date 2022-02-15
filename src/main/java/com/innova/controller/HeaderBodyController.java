@@ -29,10 +29,32 @@ public class HeaderBodyController {
 
         HttpEntity<String>  httpEntity=new HttpEntity<String>("Bu data verisi",httpHeaders);
 
-        ResponseEntity<String> response=restTemplate.exchange(URL, HttpMethod.GET,httpEntity,String.class);
-        String result=response.getBody();
+        ResponseEntity<String> data=restTemplate.exchange(URL, HttpMethod.GET,httpEntity,String.class);
+        String result=data.getBody();
 
         return "@Controller(Client): "+result;
     }
+
+
+    // RESPONSE HEADER
+    // Amaç: Server header oluşturup Client göndermesi
+    // http://localhost:8080/controller/response/header
+    @GetMapping("/controller/response/header")
+    @ResponseBody
+    public String getResponseHeaderController1() {
+
+        String URL = "http://localhost:8080/service/response/header";
+        RestTemplate restTemplate=new RestTemplate();
+
+        ResponseEntity<String> data=restTemplate.exchange(URL, HttpMethod.GET,HttpEntity.EMPTY,String.class);
+        String gelenData=data.getHeaders().getFirst("key_response");
+        String body=data.getBody();
+
+        return "@Controller(Client): "+body+" "+gelenData;
+    }
+
+
+
+
 
 }

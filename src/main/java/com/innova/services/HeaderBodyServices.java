@@ -17,4 +17,16 @@ public class HeaderBodyServices {
         log.info("@RestController(Server): "+gelenHeader);
         return ResponseEntity.ok(gelenHeader);
     }
+
+
+    // RESPONSE HEADER
+    // Amaç: Server header oluşturup Client göndermesi
+    //  http://localhost:8080/service/response/header
+    @GetMapping("/service/response/header")
+    public ResponseEntity<?> getResponseHeader(){
+        return ResponseEntity
+                .ok()
+                .header("key_response","Serverdan gelen Header response ")
+                .body("@RestController: gelen veri");
+    }
 }
