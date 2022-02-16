@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @Log4j2
@@ -24,5 +25,15 @@ public class ServletExamples {
     public ResponseEntity<?> getServletInformation() {
         String secretData = servletContext.getInitParameter("secretinformation");
         return ResponseEntity.ok(secretData);
+    }
+
+    // http://localhost:8080/servlet/common
+    @GetMapping("/common")
+    @ResponseBody
+    public ResponseEntity<?> getServletCommon(HttpServletRequest request) {
+        log.info("info " + request.getPathInfo());
+        log.info("method " + request.getMethod());
+        log.info("port " + request.getServerPort());
+        return ResponseEntity.ok(request.getPathInfo());
     }
 }
